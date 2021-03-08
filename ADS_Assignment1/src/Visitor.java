@@ -1,4 +1,4 @@
 public interface Visitor {
     void visit(Operand operand);
-    void visit(Operator operator);
+    void visit(Operator operator) throws EmptyListException, MalformedExpressionException;
 }

@@ -5,4 +5,12 @@ public class Operand extends Token {
 
         visitor.visit(this);
     }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

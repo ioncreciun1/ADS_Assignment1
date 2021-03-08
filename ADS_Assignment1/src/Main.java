@@ -1,16 +1,20 @@
+import java.util.ArrayList;
+
 public class Main {
-    public static void main(String[] args) {
-/*        LinkedList<String> stringLinkedList = new LinkedList<>();
-        stringLinkedList.addToFront("1");
-        stringLinkedList.addToFront("2");
-        stringLinkedList.addToFront("3");
+    public static void main(String[] args) throws EmptyListException, MalformedExpressionException {
+        Client client = new Client();
+        ArrayList<Token> expression = new ArrayList<>();
+        Operator operator = new Operator();
+        operator.setOperator(Operation.Division);
+        Operand operand1 = new Operand();
+        operand1.setValue(3);
+        Operand operand2 = new Operand();
+        operand2.setValue(4);
+        expression.add(operand1);
+        expression.add(operand2);
+        expression.add(operator);
 
-        System.out.println("1: "+ stringLinkedList.getHead().getData());
-        System.out.println("2: "+ stringLinkedList.getHead().getNextNode().getData());
-        System.out.println("3: "+ stringLinkedList.getHead().getNextNode().getNextNode().getData());
-
-        System.out.println("First: " + stringLinkedList.removeFirst());
-        System.out.println("First: " + stringLinkedList.removeFirst());
-        System.out.println("First: " + stringLinkedList.removeFirst());*/
+        LinkedStack<Token> stack = new LinkedStack<>();
+        System.out.println(" SHOULD BE : " + client.evaluateExpression(expression));
     }
 }

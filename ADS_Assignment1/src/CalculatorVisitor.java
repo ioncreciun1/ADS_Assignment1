@@ -9,15 +9,35 @@ public class CalculatorVisitor implements Calculator,Visitor
     {
     tokenStack.push(operand);
     }
-    private void performOperation(Operator operator)
-    {
-    Operand operand1  = (Operand)tokenStack.pop();
-    Operand operand2  = (Operand)tokenStack.pop();
+    private void performOperation(Operator operator) throws  MalformedExpressionException {
+        try {
+            Operand operand1 = (Operand) tokenStack.pop();
+            Operand operand2 = (Operand) tokenStack.pop();
+
+            switch (operator.getOperator()) {
+                case Multiplication -> operand1.setValue(operand1.getValue() * operand2.getValue());
+                case Addition -> operand1.setValue(operand1.getValue() + operand2.getValue());
+                case Subtraction -> operand1.setValue(operand1.getValue() - operand2.getValue());
+                case Division -> operand1.setValue(operand1.getValue() / operand2.getValue());
+            }
+            pushOperand(operand1);
+        }
+        catch (EmptyListException e)
+        {
+            throw new MalformedExpressionException();
+        }
 
     }
     @Override
-    public int getResult() {
-        return 0;
+    public int getResult() throws EmptyListException, MalformedExpressionException {
+
+
+        Operand operand = (Operand)tokenStack.pop();
+        if(!tokenStack.isEmpty())
+        {
+            throw new MalformedExpressionException();
+        }
+        return operand.getValue();
     }
 
     @Override
@@ -26,7 +46,7 @@ public class CalculatorVisitor implements Calculator,Visitor
     }
 
     @Override
-    public void visit(Operator operator) {
+    public void visit(Operator operator) throws MalformedExpressionException {
         performOperation(operator);
 
     }

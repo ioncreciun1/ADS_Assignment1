@@ -1,3 +1,4 @@
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.lang.Exception;
 
 public class LinkedList<T> implements List<T> {
@@ -5,8 +6,7 @@ public class LinkedList<T> implements List<T> {
     private int size;
     public LinkedList()
     {
-        head = new Node<>();
-        head.setNextNode(new Node<>());
+       head = new Node<>();
         this.size=0;
     }
 
@@ -35,7 +35,12 @@ public class LinkedList<T> implements List<T> {
     }
 
     @Override
-    public T removeFirst() {
+    public T removeFirst() throws EmptyListException {
+
+        if(size ==0)
+        {
+            throw new EmptyListException();
+        }
         T data = head.getData();
         head.setData(head.getNextNode().getData());
         head.setNextNode(head.getNextNode().getNextNode());
