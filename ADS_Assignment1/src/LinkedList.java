@@ -6,7 +6,7 @@ public class LinkedList<T> implements List<T> {
     private int size;
     public LinkedList()
     {
-       head = new Node<>();
+
         this.size=0;
     }
 
@@ -22,8 +22,7 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public void addToFront(T data) {
-       Node<T> newHead = new Node<>();
-       newHead.setData(data);
+       Node<T> newHead = new Node<>(data);
        newHead.setNextNode(head);
        head = newHead;
         size++;
