@@ -7,7 +7,7 @@ public class Client
     {
         calculatorVisitor = new CalculatorVisitor();
     }
-    public int evaluateExpression(ArrayList<Token> tokenList) throws EmptyListException, MalformedExpressionException {
+    public int evaluateExpression(ArrayList<Token> tokenList) throws MalformedExpressionException {
         for (Token token : tokenList) {
             if (token instanceof Operand) {
                 calculatorVisitor.visit((Operand) token);

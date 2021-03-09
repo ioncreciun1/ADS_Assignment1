@@ -1,3 +1,5 @@
+import java.util.EmptyStackException;
+
 public class CalculatorVisitor implements Calculator,Visitor
 {
     private LinkedStack<Token> tokenStack;
@@ -12,26 +14,34 @@ public class CalculatorVisitor implements Calculator,Visitor
     private void performOperation(Operator operator) throws  MalformedExpressionException {
         try {
             Operand operand1 = (Operand) tokenStack.pop();
+            //tokenStack.pop();
             Operand operand2 = (Operand) tokenStack.pop();
 
             switch (operator.getOperator()) {
-                case Multiplication -> operand1.setValue(operand1.getValue() * operand2.getValue());
-                case Addition -> operand1.setValue(operand1.getValue() + operand2.getValue());
-                case Subtraction -> operand1.setValue(operand1.getValue() - operand2.getValue());
-                case Division -> operand1.setValue(operand1.getValue() / operand2.getValue());
+                case Multiplication -> operand1.setValue(operand2.getValue() * operand1.getValue());
+                case Addition -> operand1.setValue(operand2.getValue() + operand1.getValue());
+                case Subtraction -> operand1.setValue(operand2.getValue() - operand1.getValue());
+
+
+                case Division -> operand1.setValue(operand2.getValue() / operand1.getValue());
             }
             pushOperand(operand1);
         }
-        catch (EmptyListException e)
+        catch (EmptyStackException e)
         {
             throw new MalformedExpressionException();
         }
 
     }
     @Override
-    public int getResult() throws EmptyListException, MalformedExpressionException {
+    public int getResult() throws MalformedExpressionException {
 
 
+
+        if(tokenStack.isEmpty())
+        {
+            throw new MalformedExpressionException();
+        }
         Operand operand = (Operand)tokenStack.pop();
         if(!tokenStack.isEmpty())
         {

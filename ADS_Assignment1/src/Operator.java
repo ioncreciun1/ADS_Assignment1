@@ -1,7 +1,7 @@
 public class Operator extends Token{
     private Operation operator;
 
-    public void accept(CalculatorVisitor visitor) throws EmptyListException, MalformedExpressionException {
+    public void accept(CalculatorVisitor visitor) throws MalformedExpressionException {
     visitor.visit(this);
     }
 

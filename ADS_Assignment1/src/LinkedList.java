@@ -40,9 +40,17 @@ public class LinkedList<T> implements List<T> {
         {
             throw new EmptyListException();
         }
+
         T data = head.getData();
-        head.setData(head.getNextNode().getData());
-        head.setNextNode(head.getNextNode().getNextNode());
+        if(head.getNextNode() == null)
+        {
+            head = null;
+        }
+        else
+        {
+            head.setData(head.getNextNode().getData());
+            head.setNextNode(head.getNextNode().getNextNode());
+        }
         size--;
         return data;
     }
